@@ -20,6 +20,7 @@ void	PhoneBook::printHelp(void) {
 void	PhoneBook::addContact(void) {
 	static int	i;
 
+	std::cout << " ------------🖊️  ADDING CONTACT 🖊️------------" << std::endl;
 	this->_contacts[i % 8].initContact();
 	this->_contacts[i % 8].setIndex(i % 8);
 	i++;

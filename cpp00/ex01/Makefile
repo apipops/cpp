@@ -30,7 +30,7 @@ YELLOW = \033[1;93m
 all: $(NAME)
 
 %.o: %.cpp
-	@$(COMP) $(FLAGS) -I./$(INCLUDE) -c $<
+	@$(COMP) $(FLAGS) -c $< 
 
 $(NAME): $(OBJ) $(INCLUDE)
 	@$(COMP) $(FLAGS) $(OBJ) -o $(NAME)
