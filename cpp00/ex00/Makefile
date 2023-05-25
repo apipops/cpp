@@ -6,7 +6,7 @@ NAME = megaphone
 SRC += megaphone.cpp
 
 #### OBJECTS
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:.cpp=.o)
 
 #### COMPILATION
 COMP = c++
@@ -22,8 +22,8 @@ YELLOW = \033[1;93m
 #### RULES
 all: $(NAME)
 
-%.o: %.c
-	@$(COMP) $(FLAGS) -c $< -o $@
+%.o: %.cpp
+	@$(COMP) $(FLAGS) -c $<
 
 $(NAME): $(OBJ)
 	@$(COMP) $(FLAGS) $(OBJ) -o $(NAME)

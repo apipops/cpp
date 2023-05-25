@@ -8,7 +8,7 @@ SRC += PhoneBook.cpp
 SRC += Contact.cpp
 
 #### OBJECTS
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:.cpp=.o)
 
 #### HEADERS
 INCLUDE += PhoneBook.hpp
@@ -18,6 +18,7 @@ INCLUDE += Contact.hpp
 COMP = c++
 FLAGS += -Wall -Wextra -Werror
 FLAGS += -std=c++98
+MAKEFLAGS += --no-print-directory
 
 #### COLORS
 BLUE = \033[1;94m
@@ -28,8 +29,8 @@ YELLOW = \033[1;93m
 #### RULES
 all: $(NAME)
 
-%.o: %.c
-	@$(COMP) $(FLAGS) -I./$(INCLUDE) -c $< -o $@
+%.o: %.cpp
+	@$(COMP) $(FLAGS) -I./$(INCLUDE) -c $<
 
 $(NAME): $(OBJ) $(INCLUDE)
 	@$(COMP) $(FLAGS) $(OBJ) -o $(NAME)
