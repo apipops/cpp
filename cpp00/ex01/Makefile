@@ -1,12 +1,18 @@
 
 #### NAME
-NAME = megaphone
+NAME = phonebook
 
 #### SOURCES
-SRC += megaphone.cpp
+SRC += main.cpp
+SRC += PhoneBook.cpp
+SRC += Contact.cpp
 
 #### OBJECTS
 OBJ = $(SRC:.c=.o)
+
+#### HEADERS
+INCLUDE += PhoneBook.hpp
+INCLUDE += Contact.hpp
 
 #### COMPILATION
 COMP = c++
@@ -23,9 +29,9 @@ YELLOW = \033[1;93m
 all: $(NAME)
 
 %.o: %.c
-	@$(COMP) $(FLAGS) -c $< -o $@
+	@$(COMP) $(FLAGS) -I./$(INCLUDE) -c $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(INCLUDE)
 	@$(COMP) $(FLAGS) $(OBJ) -o $(NAME)
 	@printf "$(YELLOW)------Compilation executed------\n\n"
 

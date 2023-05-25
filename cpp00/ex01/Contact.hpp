@@ -1,6 +1,10 @@
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
+# include <string>
+# include <iostream>
+# include <limits>
+
 class Contact 
 {
 public : 
@@ -20,7 +24,6 @@ private :
 	std::string	_secret;
 	std::string	_getInfo(std::string type) const;
 	std::string _cutLen(std::string str);
-
 };
 
 #endif
