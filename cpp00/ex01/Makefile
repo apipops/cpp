@@ -1,18 +1,22 @@
 
 #### NAME
-NAME = phonebook
+NAME		= phonebook
 
 #### SOURCES
-SRC += main.cpp
-SRC += PhoneBook.cpp
-SRC += Contact.cpp
+PATH_SRCS	= srcs/
+SRCS 		+= main.cpp
+SRCS		+= PhoneBook.cpp
+SRCS 		+= Contact.cpp
+
+vpath %.cpp $(PATH_SRCS)
 
 #### OBJECTS
-OBJ = $(SRC:.cpp=.o)
+PATH_OBJS	= objs/
+OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 
 #### HEADERS
-INCLUDE += PhoneBook.hpp
-INCLUDE += Contact.hpp
+INCLUDES += includes/PhoneBook.hpp
+INCLUDES += includes/Contact.hpp
 
 #### COMPILATION
 COMP = c++
@@ -29,20 +33,21 @@ YELLOW = \033[1;93m
 #### RULES
 all: $(NAME)
 
-%.o: %.cpp
-	@$(COMP) $(FLAGS) -c $< 
 
-$(NAME): $(OBJ) $(INCLUDE)
-	@$(COMP) $(FLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJS) $(INCLUDES) Makefile
+	@$(COMP) $(FLAGS) $(OBJS) -o $(NAME)
 	@printf "$(YELLOW)------Compilation executed------\n\n"
 
+$(OBJS): $(PATH_OBJS)/%.o: %.cpp $(INCLUDES)
+	@mkdir -p $(PATH_OBJS)
+	@$(COMP) $(FLAGS) -c $< -o $@ -I./includes
 
 clean:
-	@/bin/rm -f $(OBJ)
+	@$(RM) -R $(PATH_OBJS)
 	@printf "$(PURPLE)------Object files deleted-------\n\n"
 
 fclean: clean
-	@/bin/rm -f $(NAME)
+	@$(RM) $(NAME)
 	@printf "$(GREEN)----Executable files deleted-----\n\n"
 
 re: fclean all
