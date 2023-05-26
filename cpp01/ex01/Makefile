@@ -1,6 +1,6 @@
 
 #### NAME
-NAME		= zombieHorde
+NAME		= avast
 
 #### SOURCES
 SRCS 		+= main.cpp
