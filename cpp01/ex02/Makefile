@@ -1,9 +1,9 @@
 
 #### NAME
-NAME = megaphone
+NAME = avast
 
 #### SOURCES
-SRC += megaphone.cpp
+SRC += main.cpp
 
 #### OBJECTS
 OBJ = $(SRC:.cpp=.o)
