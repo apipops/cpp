@@ -1,19 +1,19 @@
 
 #### NAME
-NAME		= phonebook
+NAME		= zombie
 
 #### SOURCES
 SRCS 		+= main.cpp
-SRCS		+= PhoneBook.cpp
-SRCS 		+= Contact.cpp
+SRCS		+= Zombie.cpp
+SRCS 		+= newZombie.cpp
+SRCS 		+= randomChump.cpp
 
 #### OBJECTS
 PATH_OBJS	= objs/
 OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 
 #### HEADERS
-INCLUDES += PhoneBook.hpp
-INCLUDES += Contact.hpp
+INCLUDES += Zombie.hpp
 
 #### COMPILATION
 COMP = c++
