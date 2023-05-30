@@ -1,4 +1,7 @@
-#include "HumanB.hpp"
+#ifndef HUMANB_HPP
+# define HUMANB_HPP
+
+# include "HumanB.hpp"
 
 HumanB::HumanB(std::string name):_name(name), _weapon(NULL)
 {
@@ -20,3 +23,5 @@ void HumanB::setWeapon(Weapon& weapon)
 {
 	this->_weapon = &weapon;
 }
+
+#endif
