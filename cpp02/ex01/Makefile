@@ -1,6 +1,6 @@
 
 #### NAME
-NAME		= Canon
+NAME		= Fixed
 
 #### SOURCES
 SRCS 		+= main.cpp
