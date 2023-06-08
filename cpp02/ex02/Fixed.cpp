@@ -2,31 +2,26 @@
 
 Fixed::Fixed(void)
 {
-	std::cout << "Default constructor called" << std::endl;
 	this->_value = 0;
 }
 
 Fixed::Fixed(const int number)
 {
-	//std::cout << "Int constructor called" << std::endl;
 	this->_value = (number << _fractBits);
 }
 
 Fixed::Fixed(const float number)
 {
-	//std::cout << "Float constructor called" << std::endl;
 	this->_value = static_cast<int>(std::roundf(number * (1 << _fractBits)));
 }
 
 Fixed::Fixed(const Fixed & src)
 {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = src;
 }
 
 Fixed & Fixed::operator=(const Fixed & src)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &src)
 		this->_value = src.getRawBits();
 	return *this;
@@ -34,7 +29,6 @@ Fixed & Fixed::operator=(const Fixed & src)
 
 Fixed::~Fixed(void)
 {
-	std::cout << "Destructor called" << std::endl;
 }
 
 int Fixed::getRawBits() const
@@ -111,28 +105,67 @@ Fixed	Fixed::operator/(const Fixed & elem)
 
 /* INCREMENT & DECREMENT OPERATORS */
 	
-Fixed	Fixed::operator++(void)
+Fixed&	Fixed::operator++(void)
 {
 	++this->_value;
 	return *this;
 }
 
-Fixed	Fixed::operator++(int)
-{
-    Fixed tmp( *this );
-    ++this->_value;
-    return tmp;
-}
 Fixed&	Fixed::operator--(void)
 {
 	--this->_value;
 	return *this;
 }
-Fixed&	Fixed::operator--(int)
+
+Fixed	Fixed::operator++(int)
 {
-	this->_value--;
-	return *this;
+    Fixed old(*this);
+    ++this->_value;
+    return old;
 }
+
+Fixed	Fixed::operator--(int)
+{
+	Fixed old(*this);
+	--this->_value;
+	return old;
+}
+
+/* MIN & MAX FUNCTIONS */
+
+Fixed&	Fixed::min(Fixed & a, Fixed & b)
+{
+	if (a.getRawBits() < b.getRawBits())
+		return a;
+	else
+		return b;
+}
+
+const Fixed&	Fixed::min(const Fixed & a, const Fixed & b)
+{
+	if (a.getRawBits() < b.getRawBits())
+		return a;
+	else
+		return b;
+}
+
+Fixed&	Fixed::max(Fixed & a, Fixed & b)
+{
+	if (a.getRawBits() > b.getRawBits())
+		return a;
+	else
+		return b;
+}
+
+const Fixed&	Fixed::max(const Fixed & a, const Fixed & b)
+{
+	if (a.getRawBits() > b.getRawBits())
+		return a;
+	else
+		return b;
+}
+
+/* REDIRECTION OPERATORS */
 
 std::ostream & operator<<(std::ostream & out, Fixed const & element)
 {

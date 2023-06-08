@@ -31,17 +31,21 @@ public:
 	Fixed	operator*(const Fixed & elem);
 	Fixed	operator/(const Fixed & elem);
 
-
 	/* 
 	Norme pour différencier opérateurs préfixée et suffixés :
 	(http://casteyde.christian.free.fr/cpp/cours/online/x3244.html#:~:text=Le%20C%2B%2B%20permet%20donc%20de,d%C3%A9finir%20des%20fonctions%20membres%20normales)
-		- prend (void) pour préfixés
-		- prend (int) pour suffixés
+		- préfixés : prend (void) et renvoie une référence, égale à la valeur incrémentée
+		- suffixés : prend (int) et renvoie la valeur de l'objet, égale à la valeur avant incrémentation
 	*/
-	Fixed	operator++(void);
-	Fixed	operator++(int); 
+	Fixed&	operator++(void);
 	Fixed&	operator--(void);
-	Fixed&	operator--(int);
+	Fixed	operator++(int); 
+	Fixed	operator--(int);
+
+	static Fixed& min(Fixed & a, Fixed & b);
+	static const Fixed&	min(const Fixed & a, const Fixed & b);
+	static Fixed& max(Fixed & a, Fixed & b);
+	static const Fixed&	max(const Fixed & a, const Fixed & b);
 
 private:
 	int	_value;
