@@ -6,7 +6,7 @@ Point	a(0, 0);
 Point	b(0, 2);
 Point	c(2, 0);
 
-Point	inside(1, 1);
+Point	inside(0.5, 0.5);
 Point	outside(5, 5);
 Point	edge(0, 1);
 Point	corner(2, 0);
