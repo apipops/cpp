@@ -21,22 +21,23 @@ void	Replacer::replace(std::string s1, std::string s2)
 		this->_printError(this->_infile);
 	else
 	{
-		std::string	content;
-		if (std::getline(infile, content, '\0'))
+		std::string	old_content;
+		if (std::getline(infile, old_content, '\0'))
 		{
+			std::string new_content = old_content;
 			std::ofstream	outfile(this->_outfile.c_str());
 			if (outfile.fail())
 				this->_printError(this->_outfile);
 			else
 			{
-				size_t	pos = content.find(s1);
+				size_t	pos = old_content.find(s1);
 				while (pos != std::string::npos)
 				{
-					content.erase(pos, s1.length());
-					content.insert(pos, s2);
-					pos = content.find(s1, pos);
+					new_content.erase(pos, s1.length());
+					new_content.insert(pos, s2);
+					pos = old_content.find(s1, pos + s1.length());
 				}
-				outfile << content;
+				outfile << new_content;
 				outfile.close();
 			}
 		}
