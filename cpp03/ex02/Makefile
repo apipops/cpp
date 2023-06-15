@@ -1,12 +1,12 @@
 
 #### NAME
-NAME		= FlagTrap
+NAME		= FragTrap
 
 #### SOURCES
 SRCS 		+= main.cpp
 SRCS 		+= ClapTrap.cpp
 SRCS 		+= ScavTrap.cpp
-SRCS 		+= FlagTrap.cpp
+SRCS 		+= FragTrap.cpp
 
 #### OBJECTS
 PATH_OBJS	= objs/
@@ -15,7 +15,7 @@ OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 #### HEADERS
 INCLUDES += ClapTrap.hpp
 INCLUDES += ScavTrap.hpp
-INCLUDES += FlagTrap.hpp
+INCLUDES += FragTrap.hpp
 
 #### COMPILATION
 COMP = c++

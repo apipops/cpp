@@ -7,6 +7,7 @@
 class	ClapTrap 
 {
 public:
+	ClapTrap();
 	ClapTrap(std::string name);
 	ClapTrap(const ClapTrap & src);
 	ClapTrap & operator=(const ClapTrap & src);
@@ -17,7 +18,7 @@ public:
 	void beRepaired(unsigned int amount);
 
 private:
-	std::string _name;
+	std::string 	_name;
 	unsigned int	_hitPoints;
 	unsigned int	_energyPoints;
 	unsigned int	_attackDamage;
