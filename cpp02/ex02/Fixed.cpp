@@ -12,7 +12,7 @@ Fixed::Fixed(const int number)
 
 Fixed::Fixed(const float number)
 {
-	this->_value = static_cast<int>(std::roundf(number * (1 << _fractBits)));
+	this->_value = static_cast<int>(roundf(number * (1 << _fractBits)));
 }
 
 Fixed::Fixed(const Fixed & src)
