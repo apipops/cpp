@@ -1,6 +1,6 @@
 
 #### NAME
-NAME = avast
+NAME = brain
 
 #### SOURCES
 SRC += main.cpp

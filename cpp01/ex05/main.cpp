@@ -5,7 +5,7 @@ int	main(int ac, char **av)
 	if (ac == 1)
 		std::cout << "Error: No level specified" << std::endl;
 	else if (ac > 2)
-		std::cout << "Error: Too many levels" << std::endl;
+		std::cout << "Error: Too many arguments" << std::endl;
 	else
 	{
 		Harl	harl;

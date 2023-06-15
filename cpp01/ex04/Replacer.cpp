@@ -16,7 +16,7 @@ void	Replacer::_printError(std::string filename) const {
 
 void	Replacer::replace(std::string s1, std::string s2)
 {
-	std::ifstream	infile(this->_infile);
+	std::ifstream	infile(this->_infile.c_str());
 	if (infile.fail())
 		this->_printError(this->_infile);
 	else
@@ -24,7 +24,7 @@ void	Replacer::replace(std::string s1, std::string s2)
 		std::string	content;
 		if (std::getline(infile, content, '\0'))
 		{
-			std::ofstream	outfile(this->_outfile);
+			std::ofstream	outfile(this->_outfile.c_str());
 			if (outfile.fail())
 				this->_printError(this->_outfile);
 			else

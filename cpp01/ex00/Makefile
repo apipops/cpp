@@ -1,6 +1,6 @@
 
 #### NAME
-NAME		= avast
+NAME		= Zombie
 
 #### SOURCES
 SRCS 		+= main.cpp

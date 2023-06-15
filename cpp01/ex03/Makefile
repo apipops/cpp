@@ -1,6 +1,6 @@
 
 #### NAME
-NAME		= avast
+NAME		= violence
 
 #### SOURCES
 SRCS 		+= main.cpp

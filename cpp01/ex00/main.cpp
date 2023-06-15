@@ -2,13 +2,13 @@
 
 int	main(void)
 {
-	std::cout << "Calling function 'newZombie'..." << std::endl;
+	std::cout << "Calling function 'newZombie' for Rose..." << std::endl;
 	// Allocation du zombie Rose dans la heap
 	Zombie *rose = newZombie("Rose");
 
 	// Allocation du zombie Jack dans la stack
 	// dans le scope de la fonction
-	std::cout << "Calling function 'randomChump'..." << std::endl;
+	std::cout << "Calling function 'randomChump' for Jack..." << std::endl;
 	randomChump("Jack");
 
 	rose->announce(); // Rose existe en dehors de sa fonction de création

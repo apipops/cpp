@@ -4,6 +4,7 @@
 # include <iostream>
 # include <fstream>
 # include <cerrno>
+# include <cstring>
 
 class	Replacer
 {

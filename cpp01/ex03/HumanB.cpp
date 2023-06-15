@@ -19,7 +19,7 @@ void HumanB::attack(void) const
 		std::cout << this->_name << " has no weapon" << std::endl;
 }
 
-void HumanB::setWeapon(Weapon& weapon)
+void HumanB::setWeapon(Weapon &weapon)
 {
 	this->_weapon = &weapon;
 }
