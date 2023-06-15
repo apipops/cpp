@@ -16,7 +16,7 @@ ScavTrap::ScavTrap(std::string name): ClapTrap(name) // car on doit explicitemen
 	std::cout << "ScavTrap " << name << " constructor called." << std::endl;
 }
 
- ScavTrap::ScavTrap(const ScavTrap & src): ClapTrap(src._name) // Vérifier pourquoi on a accès
+ ScavTrap::ScavTrap(const ScavTrap & src): ClapTrap(src._name)
 {
 	*this = src;
 	return ;
@@ -52,8 +52,8 @@ void	ScavTrap::attack(const std::string& target)
 
 void	ScavTrap::guardGate(void)
 {
-	if (!this->_energyPoints)
-		std::cout << "ScavTrap " << this->_name << " is out of energy and cannot enter gate keeper mode.." << std::endl;
+	if (!this->_hitPoints)
+		std::cout << "ScavTrap " << this->_name << " is dead and cannot enter gate keeper mode." << std::endl;
 	else
 		std::cout << "ScavTrap " << this->_name << " has entered gate keeper mode." << std::endl;	
 }

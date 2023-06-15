@@ -8,13 +8,14 @@ int main(void)
 
 	std::cout << std::endl << "  > TESTS WITH CLAUDE" << std::endl;
 	scav.attack("Jacques");
-	scav.takeDamage(5);
-	scav.beRepaired(5);
+	scav.takeDamage(50);
+	scav.beRepaired(50);
 	scav.guardGate(); // gate keeper mode
-	scav.takeDamage(10); // dies
+	scav.takeDamage(100); // dies
 	scav.takeDamage(10); // already dead
 	scav.beRepaired(10); // cannot repair
 	scav.attack("Jacques"); // cannot attack
+	scav.guardGate(); // cannot enter gate keeper mode
 
 	std::cout << std::endl << "  > TESTS WITH [ANONYMOUS]" << std::endl;
 	for (int i = 0; i < 51; i++)

@@ -16,6 +16,11 @@ void	Replacer::_printError(std::string filename) const {
 
 void	Replacer::replace(std::string s1, std::string s2)
 {
+	if (s1.empty())
+	{
+		std::cout << "Error: Cannot replace empty string" <<std::endl;
+		return;
+	}
 	std::ifstream	infile(this->_infile.c_str());
 	if (infile.fail())
 		this->_printError(this->_infile);
