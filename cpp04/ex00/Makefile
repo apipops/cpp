@@ -1,17 +1,25 @@
 
 #### NAME
-NAME		= ClapTrap
+NAME		= polymorphism
 
 #### SOURCES
 SRCS 		+= main.cpp
-SRCS 		+= ClapTrap.cpp
+SRCS 		+= Animal.cpp
+SRCS 		+= Dog.cpp
+SRCS 		+= Cat.cpp
+SRCS 		+= WrongAnimal.cpp
+SRCS 		+= WrongCat.cpp
 
 #### OBJECTS
 PATH_OBJS	= objs/
 OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 
 #### HEADERS
-INCLUDES += ClapTrap.hpp
+INCLUDES += Animal.hpp
+INCLUDES += Dog.hpp
+INCLUDES += Cat.hpp
+INCLUDES += WrongAnimal.hpp
+INCLUDES += WrongCat.hpp
 
 #### COMPILATION
 COMP = c++
