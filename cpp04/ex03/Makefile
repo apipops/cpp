@@ -5,13 +5,23 @@ NAME		= interface
 #### SOURCES
 SRCS 		+= main.cpp
 SRCS 		+= AMateria.cpp
+SRCS 		+= Cure.cpp
+SRCS 		+= Ice.cpp
+SRCS 		+= Character.cpp
+SRCS 		+= MateriaSource.cpp
 
 #### OBJECTS
 PATH_OBJS	= objs/
 OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 
 #### HEADERS
-INCLUDES += AMateria.hpp
+INCLUDES	+= AMateria.hpp
+INCLUDES	+= Cure.hpp
+INCLUDES	+= Ice.hpp
+INCLUDES	+= Character.hpp
+INCLUDES	+= ICharacter.hpp
+INCLUDES	+= MateriaSource.hpp
+INCLUDES	+= IMateriaSource.hpp
 
 #### COMPILATION
 COMP = c++

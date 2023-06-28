@@ -15,11 +15,11 @@ PATH_OBJS	= objs/
 OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 
 #### HEADERS
-INCLUDES += Animal.hpp
-INCLUDES += Dog.hpp
-INCLUDES += Cat.hpp
-INCLUDES += WrongAnimal.hpp
-INCLUDES += WrongCat.hpp
+INCLUDES	+= Animal.hpp
+INCLUDES	+= Dog.hpp
+INCLUDES	+= Cat.hpp
+INCLUDES	+= WrongAnimal.hpp
+INCLUDES	+= WrongCat.hpp
 
 #### COMPILATION
 COMP = c++
