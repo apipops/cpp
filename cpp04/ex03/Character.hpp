@@ -11,8 +11,6 @@ class Character : public ICharacter
 private:
 	std::string	_name;
 	AMateria* _inventory[4];
-/* 	static AMateria* _floor[30];
-	static int	_nbCharacters; */
 
 public:
 	Character();

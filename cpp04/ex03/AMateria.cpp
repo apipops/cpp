@@ -16,12 +16,11 @@ AMateria::AMateria(const AMateria & src)
 	// std::cout << "AMateria copy constructor called" << std::endl;
 }
 
-/* AMateria & AMateria::operator=(const AMateria & src)
+AMateria & AMateria::operator=(const AMateria & src)
 {
 	this->_type = src._type;
-	this->_isTaken = 0;
 	return *this;
-} */
+}
 
 AMateria::~AMateria()
 {

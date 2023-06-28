@@ -20,7 +20,7 @@ public:
 	AMateria();
 	AMateria(std::string const & type);
 	AMateria(const AMateria & src);
-	// AMateria & operator=(const AMateria & src);
+	AMateria & operator=(const AMateria & src);
 	virtual ~AMateria();
 
 	std::string const & getType() const;

@@ -5,8 +5,6 @@
 # include <string>
 # include <iostream>
 
-class IMateriaSource;
-
 class MateriaSource : public IMateriaSource
 {
 private:
