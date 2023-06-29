@@ -28,7 +28,7 @@ Animal::~Animal()
 
 void	Animal::makeSound() const
 {
-	std::cout << "* NOT RECOGNIZABLE ANIMAL SOUD *" << std::endl;
+	std::cout << "* NOT RECOGNIZABLE ANIMAL SOUND *" << std::endl;
 }
 
 std::string	Animal::getType() const

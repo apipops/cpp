@@ -2,7 +2,6 @@
 
 Cure::Cure():AMateria("cure")
 {
-	// std::cout << "Cure constructor called" << std::endl;
 }
 
 Cure::Cure(const Cure & src):AMateria("cure")
@@ -19,7 +18,6 @@ Cure & Cure::operator=(const Cure & src)
 
 Cure::~Cure()
 {
-	// std::cout << "Cure destructor called" << std::endl;
 }
 
 Cure* Cure::clone() const

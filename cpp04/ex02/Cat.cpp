@@ -6,10 +6,10 @@ Cat::Cat():Animal("Cat")
 	this->_brain = new Brain();
 }
 
-Cat::Cat(const Cat & src):Animal(src._type)
+Cat::Cat(const Cat & src)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
-	this->_brain = new Brain(*src._brain);
+	*this = src;
 }
 
 Cat & Cat::operator=(const Cat & src)

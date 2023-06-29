@@ -15,9 +15,9 @@ public:
 	Cat();
 	Cat(const Cat & src);
 	Cat & operator=(const Cat & src);
-	~Cat();
+	virtual ~Cat();
 
-	void	makeSound() const;
+	virtual void	makeSound() const;
 	Brain*	getBrainPointer() const;
 };
 

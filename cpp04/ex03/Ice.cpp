@@ -2,7 +2,6 @@
 
 Ice::Ice():AMateria("ice")
 {
-	// std::cout << "Ice constructor called" << std::endl;
 }
 
 Ice::Ice(const Ice & src):AMateria("ice")
@@ -19,7 +18,6 @@ Ice & Ice::operator=(const Ice & src)
 
 Ice::~Ice()
 {
-	// std::cout << "Ice destructor called" << std::endl;
 }
 
 Ice* Ice::clone() const

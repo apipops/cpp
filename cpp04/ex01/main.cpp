@@ -1,5 +1,6 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include "WrongCat.hpp"
 
 int main()
 {
@@ -26,20 +27,22 @@ int main()
 		delete animals[i];
 
 	std::cout << std::endl << " > CHECKING DEEP COPYING..." << std::endl;
-	std::cout << "  1) Initializing original cat and copy cat..." << std::endl;
-	Cat	*original = new Cat();
-	Cat	*copy = new Cat(*original);
+	std::cout << "  1) Initializing original cat, cat1 (copy) & cat2 (copy)..." << std::endl;
+	Cat	original;
+	Cat	copy1(original);
+	Cat	copy2 = original;
 	std::cout << "  2) Checking type and sounds..." << std::endl;
-	std::cout << "   - original) Type : " << original->getType() << " / Sound : ";
-	original->makeSound();
-	std::cout << "   - copy) Type : " << copy->getType() << " / Sound : ";
-	copy->makeSound();
-	std::cout << "  3) Comparing brain's pointers of original vs. copy..." << std::endl;
-	std::cout << "   - original : " << original->getBrainPointer() << std::endl;
-	std::cout << "   - copy : " << copy->getBrainPointer() << std::endl;
-	std::cout << "  4) Deleting..." << std::endl;
-	delete original;
-	delete copy;
+	std::cout << "   - original) Type : " << original.getType() << " / Sound : ";
+	original.makeSound();
+	std::cout << "   - copy1) Type : " << copy1.getType() << " / Sound : ";
+	copy1.makeSound();
+	std::cout << "   - copy2) Type : " << copy2.getType() << " / Sound : ";
+	copy2.makeSound();
+	std::cout << "  3) Comparing brain's pointers of original vs. copies..." << std::endl;
+	std::cout << "   - original : " << original.getBrainPointer() << std::endl;
+	std::cout << "   - copy1 : " << copy1.getBrainPointer() << std::endl;
+	std::cout << "   - copy2 : " << copy2.getBrainPointer() << std::endl;
+	std::cout << "  4) Desctrutors..." << std::endl;
 
 	return 0;
 }

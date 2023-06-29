@@ -2,18 +2,15 @@
 
 AMateria::AMateria():_type("unknown"),_isTaken(0)
 {
-	// std::cout << "AMateria constructor called" << std::endl;
 }
 
 AMateria::AMateria(std::string const & type):_type(type), _isTaken(0)
 {
-	// std::cout << "AMateria constructor called" << std::endl;
 }
 	
 AMateria::AMateria(const AMateria & src)
 {
 	*this = src;
-	// std::cout << "AMateria copy constructor called" << std::endl;
 }
 
 AMateria & AMateria::operator=(const AMateria & src)
@@ -24,7 +21,6 @@ AMateria & AMateria::operator=(const AMateria & src)
 
 AMateria::~AMateria()
 {
-	// std::cout << "AMateria destructor called" << std::endl;
 }
 
 std::string const & AMateria::getType() const

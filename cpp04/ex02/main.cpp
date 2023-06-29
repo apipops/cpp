@@ -5,7 +5,7 @@ int main()
 {
 	int	nbAnimals = 4;
 
-	//Animal test; 
+	//Animal test_goes_wrong; 
 	// Test pour prouver que la classe est abstraite.
 
 	std::cout << " > TAB INITIALIZATION..." << std::endl;

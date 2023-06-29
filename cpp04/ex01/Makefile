@@ -7,6 +7,8 @@ SRCS 		+= main.cpp
 SRCS 		+= Animal.cpp
 SRCS 		+= Dog.cpp
 SRCS 		+= Cat.cpp
+SRCS 		+= WrongAnimal.cpp
+SRCS 		+= WrongCat.cpp
 SRCS 		+= Brain.cpp
 
 #### OBJECTS
@@ -17,6 +19,8 @@ OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 INCLUDES += Animal.hpp
 INCLUDES += Dog.hpp
 INCLUDES += Cat.hpp
+INCLUDES	+= WrongAnimal.hpp
+INCLUDES	+= WrongCat.hpp
 INCLUDES += Brain.hpp
 
 #### COMPILATION

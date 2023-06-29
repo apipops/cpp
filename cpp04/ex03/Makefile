@@ -1,6 +1,6 @@
 
 #### NAME
-NAME		= interface
+NAME		= materia
 
 #### SOURCES
 SRCS 		+= main.cpp
