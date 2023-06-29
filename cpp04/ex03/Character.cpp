@@ -22,7 +22,15 @@ Character & Character::operator=(const Character & src)
 	if (this != &src)
 	{
 		this->_name = src._name;
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 4; i++) // supprimer l'ancien inventory
+		{
+			if (this->_inventory[i]) 
+			{
+				delete this->_inventory[i];
+				this->_inventory[i] = NULL;
+			}
+		}
+		for (int i = 0; i < 4; i++) // remplacer par le nouvel inventory
 		{
 			if (src._inventory[i])
 				this->_inventory[i] = src._inventory[i]->clone();

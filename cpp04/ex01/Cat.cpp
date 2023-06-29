@@ -16,7 +16,7 @@ Cat & Cat::operator=(const Cat & src)
 {
 	if (this != &src)
 	{
-		this->_type = src._type;
+		this->_type = src._type; // checker swap
 		this->_brain = new Brain(*src._brain);
 	}
 	return *this;

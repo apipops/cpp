@@ -12,6 +12,8 @@ private:
 	std::string	_name;
 	AMateria* _inventory[4];
 
+	void	_delete_inventory();
+
 public:
 	Character();
 	Character(std::string name);
