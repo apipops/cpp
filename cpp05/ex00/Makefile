@@ -1,25 +1,17 @@
 
 #### NAME
-NAME		= polymorphism
+NAME		= bureaucrat
 
 #### SOURCES
 SRCS 		+= main.cpp
-SRCS 		+= Animal.cpp
-SRCS 		+= Dog.cpp
-SRCS 		+= Cat.cpp
-SRCS 		+= WrongAnimal.cpp
-SRCS 		+= WrongCat.cpp
+SRCS 		+= Bureaucrat.cpp
 
 #### OBJECTS
 PATH_OBJS	= objs/
 OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 
 #### HEADERS
-INCLUDES	+= Animal.hpp
-INCLUDES	+= Dog.hpp
-INCLUDES	+= Cat.hpp
-INCLUDES	+= WrongAnimal.hpp
-INCLUDES	+= WrongCat.hpp
+INCLUDES	+= Bureaucrat.hpp
 
 #### COMPILATION
 COMP = c++
@@ -43,7 +35,7 @@ $(NAME): $(OBJS) $(INCLUDES) Makefile
 
 $(OBJS): $(PATH_OBJS)/%.o: %.cpp $(INCLUDES)
 	@mkdir -p $(PATH_OBJS)
-	@$(COMP) $(FLAGS) -o $@ -I./includes
+	@$(COMP) $(FLAGS) -c $< -o $@ -I./includes
 
 clean:
 	@$(RM) -R $(PATH_OBJS)
