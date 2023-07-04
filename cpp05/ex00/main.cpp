@@ -2,9 +2,6 @@
 
 int main()
 {
-/* 	Bureaucrat	tooLow("Low", 151);
-	Bureaucrat	bob("Bob", 151); */
-
 	try
 	{
 		std::cout << "> #1 WRONG INITIALISATION : TOO HIGH" << std::endl;

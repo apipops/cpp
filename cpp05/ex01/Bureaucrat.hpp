@@ -3,6 +3,9 @@
 
 # include <string>
 # include <iostream>
+# include "Form.hpp"
+
+class Form;
 
 class Bureaucrat 
 {
@@ -10,7 +13,7 @@ private:
 	std::string const _name;
 	int _grade;
 
-	Bureaucrat(); // Interdire la creation d'un bureaucrate sans l'initialisation de ses attributs
+	Bureaucrat();
 
 public:
 	Bureaucrat(std::string name, int grade);
@@ -23,6 +26,8 @@ public:
 	void setGradeUp();
 	void setGradeDown();
 
+	void signForm(Form & form);
+
 	friend std::ostream & operator<<(std::ostream & out, Bureaucrat const & obj);
 
 	class GradeTooHighException : public std::exception {
@@ -34,6 +39,7 @@ public:
 		public :
 			virtual const char* what() const throw();
 	};
+
 };
 
 #endif
