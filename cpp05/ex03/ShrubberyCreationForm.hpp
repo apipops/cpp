@@ -14,6 +14,13 @@ public:
 	ShruberryCreationForm & operator=(ShruberryCreationForm const &src);
 	virtual ~ShruberryCreationForm();
 
+	virtual void execute(Bureaucrat const & executor) const;
+
+	class FileErrorException : public std::exception {
+		public :
+			virtual const char* what() const throw();
+	};
+
 };
 
 #endif
