@@ -6,6 +6,9 @@ NAME		= bureaucrat
 SRCS 		+= main.cpp
 SRCS 		+= Bureaucrat.cpp
 SRCS 		+= Form.cpp
+SRCS 		+= ShrubberyCreationForm.cpp
+SRCS 		+= RobotomyRequestForm.cpp
+SRCS 		+= PresidentialPardonForm.cpp
 
 #### OBJECTS
 PATH_OBJS	= objs/
@@ -14,6 +17,8 @@ OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 #### HEADERS
 INCLUDES	+= Bureaucrat.hpp
 INCLUDES	+= Form.hpp
+INCLUDES	+= RobotomyRequestForm.hpp
+INCLUDES	+= PresidentialPardonForm.hpp
 
 #### COMPILATION
 COMP = c++
@@ -44,6 +49,7 @@ clean:
 	@printf "$(PURPLE)------Object files deleted-------\n\n"
 
 fclean: clean
+	@$(RM) *_shruberry
 	@$(RM) $(NAME)
 	@printf "$(GREEN)----Executable files deleted-----\n\n"
 

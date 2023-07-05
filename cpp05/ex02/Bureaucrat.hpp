@@ -27,7 +27,7 @@ public:
 	void setGradeDown();
 
 	void signForm(Form & form);
-	virtual void execute(Bureaucrat const & executor) const = 0; // Form class is bastract
+	void executeForm(Form const & form) const;
 
 	friend std::ostream & operator<<(std::ostream & out, Bureaucrat const & obj);
 

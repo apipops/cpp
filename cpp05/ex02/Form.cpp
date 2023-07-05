@@ -1,10 +1,10 @@
 #include "Form.hpp"
 
-Form::Form(std::string name, int minSign, int minExec, std::string target):
+Form::Form(std::string name, std::string target, int minSign, int minExec):
 	_name(name),
+	_target(target),
 	_minSign(minSign),
-	_minExec(minExec),
-	_target(target)
+	_minExec(minExec)
 {
 	this->_isSigned = false;
 	if (minSign < 1 || minExec < 1)
@@ -15,10 +15,10 @@ Form::Form(std::string name, int minSign, int minExec, std::string target):
 
 Form::Form(Form const &src):
 	_name(src.getName()),
+	_target(src.getTarget()),
 	_isSigned(src.getSignStatus()),
 	_minSign(src.getMinSign()),
-	_minExec(src.getMinExec()),
-	_target(src.getTarget())
+	_minExec(src.getMinExec())
 {
 }
 
@@ -37,6 +37,11 @@ std::string const & Form::getName() const
 	return this->_name;
 }
 
+std::string const & Form::getTarget() const
+{
+	return this->_target;
+}
+
 int Form::getSignStatus() const 
 {
 	return this->_isSigned;
@@ -50,11 +55,6 @@ int Form::getMinSign() const
 int Form::getMinExec() const 
 {
 	return this->_minExec;
-}
-
-std::string const & Form::getTarget() const
-{
-	return this->_target;
 }
 
 void Form::beSigned(Bureaucrat & bureaucrat)
@@ -89,7 +89,10 @@ const char* Form::UnsignedForExecutionException::what() const throw()
 
 std::ostream & operator<<(std::ostream & out, Form const & obj)
 {
-	out << "Form " << obj.getName() << ", requires " << obj.getMinSign() << " to be signed and "
-		<< obj.getMinExec() << " to be executed." << std::endl;
+	out << "Form " << obj.getName() << " infos: " << std::endl
+		<< " - name: " << obj.getName() << std::endl
+		<< " - target: " << obj.getTarget() << std::endl
+		<< " - min. to sign: " << obj.getMinSign() << std::endl
+		<< " - min. to execute: " << obj.getMinExec() << std::endl;
 	return out;
 }

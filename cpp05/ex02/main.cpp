@@ -1,4 +1,7 @@
 #include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main()
 {
@@ -60,9 +63,15 @@ int main()
 
 	try
 	{
-		std::cout << std::endl <<  "> #1 FORM: WRONG INITIALISATION" << std::endl;
-		Form wrongForm("wrong", 0, 0);
-		std::cout << wrongForm;
+		std::cout << std::endl <<  "> #1 SHRUBERRY CREATION FORM" << std::endl;
+		ShruberryCreationForm shruberryForm("garden");
+		std::cout << shruberryForm;
+		Bureaucrat mark("Mark", 50);
+		std::cout << mark;
+		mark.executeForm(shruberryForm);
+		mark.signForm(shruberryForm);
+		mark.executeForm(shruberryForm);
+		
 	}
 	catch(Form::GradeTooLowException & e)
 	{
@@ -73,21 +82,44 @@ int main()
 		std::cout << "Wrong form initialization : minimum " << e.what() << std::endl;
 	}
 
-	std::cout << std::endl <<  "> #2 FORM: INSUFFICENT LEVEL" << std::endl;
-	Bureaucrat kevin("Kevin", 101);
-	std::cout << kevin;
-	Form form1("F1", 100, 100);
-	std::cout << form1;
-	kevin.signForm(form1);
+	try
+	{
+		std::cout << std::endl <<  "> #2 ROBOTOMY REQUEST FORM" << std::endl;
+		RobotomyRequestForm robotomyForm("James");
+		std::cout << robotomyForm;
+		Bureaucrat britney("Britney", 30);
+		std::cout << britney;
+		britney.signForm(robotomyForm);
+		britney.executeForm(robotomyForm);
+	}
+	catch(Form::GradeTooLowException & e)
+	{
+		std::cout << "Wrong form initialization : minimum " << e.what() << std::endl;
+	}
+	catch(Form::GradeTooHighException & e)
+	{
+		std::cout << "Wrong form initialization : minimum " << e.what() << std::endl;
+	}
 
-	std::cout << std::endl <<  "> #3 FORM: GOOD USAGE" << std::endl;
-	kevin.setGradeUp();
-	std::cout << kevin;
-	std::cout << form1;
-	kevin.signForm(form1);
+	try
+	{
+		std::cout << std::endl <<  "> #3 PRESIDENTIAL PARDON FORM" << std::endl;
+		PresidentialPardonForm pardonForm("Karl");
+		std::cout << pardonForm;;
+		Bureaucrat jane("Jane", 5);
+		std::cout << jane;
+		jane.signForm(pardonForm);
+		jane.executeForm(pardonForm);
+	}
+	catch(Form::GradeTooLowException & e)
+	{
+		std::cout << "Wrong form initialization : minimum " << e.what() << std::endl;
+	}
+	catch(Form::GradeTooHighException & e)
+	{
+		std::cout << "Wrong form initialization : minimum " << e.what() << std::endl;
+	}
 
-	std::cout << std::endl <<  "> #4 FORM: ALREADY SIGNED" << std::endl;
-	kevin.signForm(form1);
 
 	return 0;
 }
