@@ -21,7 +21,7 @@ public:
 	Form(Form const &src);
 	Form & operator=(Form const &src);
 	Form(std::string name, int minSign, int minExec);
-	~Form(); // classe de base
+	~Form();
 
 	std::string const & getName() const;
 	int getSignStatus() const;
