@@ -29,18 +29,18 @@ class ScalarConverter
         ~ScalarConverter();
         // classe statique : ne peut être instanciée
 
-        static int  _findType(std::string input);
         static bool _isChar(std::string input);
         static bool _isInt(std::string input);
         static bool _isFloat(std::string input);
         static bool _isDouble(std::string input);
+        static bool _isOverflow(int type, std::string input);
+        static int  _findType(std::string input);
+
         static void _convertChar(std::string input);
         static void _convertInt(std::string input);
         static void _convertFloat(std::string input);
         static void _convertDouble(std::string input);
         static void _convertSpecial(std::string input);
 };
-
-typedef void	(ScalarConverter::*t_function)(std::string input);
 
 #endif

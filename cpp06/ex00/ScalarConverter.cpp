@@ -1,29 +1,12 @@
 #include "ScalarConverter.hpp"
 
-/* void ScalarConverter::convert(std::string input)
-{
-    int i = ScalarConverter::_findType(input);
-    t_function 	converters[5] = { 
-        &ScalarConverter::_convertChar,
-        &ScalarConverter::_convertInt,
-        &ScalarConverter::_convertFloat,
-        &ScalarConverter::_convertDouble, 
-        &ScalarConverter::_convertSpecial };
-    if (i == WRONG)
-        std::cout << "Error: invalid input" << std::endl;
-    else if (i == EMPTY)
-        std::cout << "Error: empty string" << std::endl;
-    else
-        ScalarConversion::*converters[i](input);
-} */
-
 void ScalarConverter::convert(std::string input)
 {
     int i = ScalarConverter::_findType(input);
     if (i == EMPTY)
-        std::cout << "Error: empty string" << std::endl;
+        std::cout << "Error: empty string." << std::endl;
     else if (i == WRONG)
-        std::cout << "Error: invalid input" << std::endl;
+        std::cout << "Error: invalid input." << std::endl;
     else if (i == CHAR)
         ScalarConverter::_convertChar(input);
     else if (i == INT)
@@ -35,26 +18,8 @@ void ScalarConverter::convert(std::string input)
     else if (i == SPECIAL)
         ScalarConverter::_convertSpecial(input);
 } 
-
-int  ScalarConverter::_findType(std::string input)
-{
-    if (input.empty())
-        return EMPTY;
-    else if (ScalarConverter::_isChar(input))
-        return CHAR;
-    else if (ScalarConverter::_isInt(input))
-        return INT;
-    else if (ScalarConverter::_isFloat(input))
-        return FLOAT;
-    else if (ScalarConverter::_isDouble(input))
-        return DOUBLE;
-    else if (input == "-inf" || input == "-inff"
-        || input == "+inf" || input == "+inff"
-        || input == "nan" || input == "nanf")
-        return SPECIAL;
-    else   
-        return WRONG;
-}
+    // Cannot use pointers to static member functions because
+    // C++ does not register the address of a static member function
 
 bool ScalarConverter::_isChar(std::string input)
 {
@@ -96,7 +61,7 @@ bool ScalarConverter::_isFloat(std::string input)
         {
             if (input[i] == '.')
             {
-                if (flagDot)
+                if (flagDot || i == start)
                     return false;
                 flagDot = 1;
             }
@@ -110,7 +75,7 @@ bool ScalarConverter::_isFloat(std::string input)
                 return false;
         }
     }
-     if (std::atof(input.c_str()) < FLT_MIN || std::atof(input.c_str()) > FLT_MAX)
+    if (ScalarConverter::_isOverflow(FLOAT, input))
         return false;
     return true;
 }
@@ -137,9 +102,54 @@ bool ScalarConverter::_isDouble(std::string input)
                 return false;
         }
     }
+    if (ScalarConverter::_isOverflow(DOUBLE, input))
+        return false;
     return true;
 }
 
+bool ScalarConverter::_isOverflow(int type, std::string input)
+{
+    if (type == FLOAT)
+    {
+        if ((std::isdigit(input[0]) || input[0] == '+') && std::atof(input.c_str()) < FLT_MIN)
+            return true;
+        if ((std::isdigit(input[0]) || input[0] == '+') && std::atof(input.c_str()) > FLT_MAX)
+            return true;
+        if (input[0] == '-' && (std::atof(input.c_str()) > -FLT_MIN || std::atof(input.c_str()) < -FLT_MAX))
+            return true;
+        return false;
+    }
+    else
+    {
+        if ((std::isdigit(input[0]) || input[0] == '+') && std::atof(input.c_str()) < DBL_MIN)
+            return true;
+        if ((std::isdigit(input[0]) || input[0] == '+') && std::atof(input.c_str()) > DBL_MAX)
+            return true;
+        if (input[0] == '-' && (std::atof(input.c_str()) > -DBL_MIN || std::atof(input.c_str()) < -DBL_MAX))
+            return true;
+        return false;
+    }
+}  
+
+int  ScalarConverter::_findType(std::string input)
+{
+    if (input.empty())
+        return EMPTY;
+    else if (ScalarConverter::_isChar(input))
+        return CHAR;
+    else if (ScalarConverter::_isInt(input))
+        return INT;
+    else if (ScalarConverter::_isFloat(input))
+        return FLOAT;
+    else if (ScalarConverter::_isDouble(input))
+        return DOUBLE;
+    else if (input == "-inf" || input == "-inff"
+        || input == "+inf" || input == "+inff"
+        || input == "nan" || input == "nanf")
+        return SPECIAL;
+    else   
+        return WRONG;
+}
 
 void ScalarConverter::_convertChar(std::string input)
 {
@@ -216,7 +226,7 @@ void ScalarConverter::_convertDouble(std::string input)
         std::cout << "int: " << static_cast<int>(d) << std::endl;
 
     // floats
-    if (d < FLT_MIN || d > FLT_MAX)
+    if (ScalarConverter::_isOverflow(FLOAT, input))
         std::cout << "float: Overflow" << std::endl;
     else if (decimal)
         std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
