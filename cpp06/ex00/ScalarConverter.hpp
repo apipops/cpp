@@ -33,7 +33,6 @@ class ScalarConverter
         static bool _isInt(std::string input);
         static bool _isFloat(std::string input);
         static bool _isDouble(std::string input);
-        static bool _isOverflow(int type, std::string input);
         static int  _findType(std::string input);
 
         static void _convertChar(std::string input);

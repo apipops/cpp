@@ -75,7 +75,7 @@ bool ScalarConverter::_isFloat(std::string input)
                 return false;
         }
     }
-    if (ScalarConverter::_isOverflow(FLOAT, input))
+        if (std::atof(input.c_str()) < -FLT_MAX || std::atof(input.c_str()) > FLT_MAX)
         return false;
     return true;
 }
@@ -102,34 +102,10 @@ bool ScalarConverter::_isDouble(std::string input)
                 return false;
         }
     }
-    if (ScalarConverter::_isOverflow(DOUBLE, input))
+    if (std::atof(input.c_str()) < -DBL_MAX || std::atof(input.c_str()) > DBL_MAX)
         return false;
     return true;
 }
-
-bool ScalarConverter::_isOverflow(int type, std::string input)
-{
-    if (type == FLOAT)
-    {
-        if ((std::isdigit(input[0]) || input[0] == '+') && std::atof(input.c_str()) < FLT_MIN)
-            return true;
-        if ((std::isdigit(input[0]) || input[0] == '+') && std::atof(input.c_str()) > FLT_MAX)
-            return true;
-        if (input[0] == '-' && (std::atof(input.c_str()) > -FLT_MIN || std::atof(input.c_str()) < -FLT_MAX))
-            return true;
-        return false;
-    }
-    else
-    {
-        if ((std::isdigit(input[0]) || input[0] == '+') && std::atof(input.c_str()) < DBL_MIN)
-            return true;
-        if ((std::isdigit(input[0]) || input[0] == '+') && std::atof(input.c_str()) > DBL_MAX)
-            return true;
-        if (input[0] == '-' && (std::atof(input.c_str()) > -DBL_MIN || std::atof(input.c_str()) < -DBL_MAX))
-            return true;
-        return false;
-    }
-}  
 
 int  ScalarConverter::_findType(std::string input)
 {
@@ -226,7 +202,7 @@ void ScalarConverter::_convertDouble(std::string input)
         std::cout << "int: " << static_cast<int>(d) << std::endl;
 
     // floats
-    if (ScalarConverter::_isOverflow(FLOAT, input))
+    if (d < -FLT_MAX || d > FLT_MAX)
         std::cout << "float: Overflow" << std::endl;
     else if (decimal)
         std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
