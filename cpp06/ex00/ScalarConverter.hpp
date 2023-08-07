@@ -20,7 +20,7 @@ class ScalarConverter
 {
     public:
         static void convert(std::string input);
-        // static : pas besoin d'être instanciée
+        // 'static' : pas besoin d'être instancié
         
     private: 
         ScalarConverter();
