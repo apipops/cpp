@@ -30,5 +30,5 @@ int main()
 	print_data_info(deserializedData);
 
 	delete originalData;
-
+	return 0;
 }
