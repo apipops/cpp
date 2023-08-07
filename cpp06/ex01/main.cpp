@@ -4,8 +4,10 @@ void print_data_info(Data *data)
 {
 	if (data)
 	{
+		std::cout << "Pointer: " << data << std::endl;
 		std::cout << "Name: " << data->name << std::endl;
 		std::cout << "Age: " << data->age << std::endl;
+		std::cout << "Nationality: " << data->nationality << std::endl;
 	}
 }
 
