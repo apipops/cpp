@@ -73,11 +73,11 @@ int main()
 		mark.executeForm(shruberryForm);
 		
 	}
-	catch(Form::GradeTooLowException & e)
+	catch(AForm::GradeTooLowException & e)
 	{
 		std::cout << "Wrong form initialization : minimum " << e.what() << std::endl;
 	}
-	catch(Form::GradeTooHighException & e)
+	catch(AForm::GradeTooHighException & e)
 	{
 		std::cout << "Wrong form initialization : minimum " << e.what() << std::endl;
 	}
@@ -92,11 +92,11 @@ int main()
 		britney.signForm(robotomyForm);
 		britney.executeForm(robotomyForm);
 	}
-	catch(Form::GradeTooLowException & e)
+	catch(AForm::GradeTooLowException & e)
 	{
 		std::cout << "Wrong form initialization : minimum " << e.what() << std::endl;
 	}
-	catch(Form::GradeTooHighException & e)
+	catch(AForm::GradeTooHighException & e)
 	{
 		std::cout << "Wrong form initialization : minimum " << e.what() << std::endl;
 	}
@@ -111,11 +111,11 @@ int main()
 		jane.signForm(pardonForm);
 		jane.executeForm(pardonForm);
 	}
-	catch(Form::GradeTooLowException & e)
+	catch(AForm::GradeTooLowException & e)
 	{
 		std::cout << "Wrong form initialization : minimum " << e.what() << std::endl;
 	}
-	catch(Form::GradeTooHighException & e)
+	catch(AForm::GradeTooHighException & e)
 	{
 		std::cout << "Wrong form initialization : minimum " << e.what() << std::endl;
 	}

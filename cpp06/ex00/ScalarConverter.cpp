@@ -164,7 +164,7 @@ void ScalarConverter::_convertFloat(std::string input)
         std::cout << "char: '" << static_cast<char>(f) << "'" << std::endl;
 
     // int
-    if (f < INT_MIN || f > INT_MAX)
+    if (f < static_cast<float>(INT_MIN) || f > static_cast<float>(INT_MAX))
         std::cout << "int: Overflow" << std::endl;
     else
         std::cout << "int: " << static_cast<int>(f) << std::endl;

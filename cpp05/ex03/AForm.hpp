@@ -8,7 +8,7 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 protected:
 	std::string const _name;
@@ -17,13 +17,13 @@ protected:
 	int const _minSign;
 	int const _minExec;
 
-	Form();
+	AForm();
+	AForm(AForm const &src);
+	AForm & operator=(AForm const &src);
 
 public:
-	Form(std::string name, std::string target, int minSign, int minExec);
-	Form(Form const &src);
-	Form & operator=(Form const &src);
-	virtual ~Form(); // virtual destructor
+	AForm(std::string name, std::string target, int minSign, int minExec);
+	virtual ~AForm(); // virtual destructor
 
 	std::string const & getName() const;
 	std::string const & getTarget() const;
@@ -32,9 +32,9 @@ public:
 	int getMinExec() const;
 
 	void beSigned(Bureaucrat & bureaucrat);
-	virtual void execute(Bureaucrat const & executor) const = 0; // class From is astract
+	virtual void execute(Bureaucrat const & executor) const = 0; // AFrom is astract
 
-	friend std::ostream & operator<<(std::ostream & out, Form const & obj);
+	friend std::ostream & operator<<(std::ostream & out, AForm const & obj);
 
 	class GradeTooHighException : public std::exception {
 		public :

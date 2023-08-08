@@ -12,20 +12,6 @@ Form::Form(std::string name, int minSign, int minExec):
 		throw Form::GradeTooLowException();
 }
 
-Form::Form(Form const &src):
-	_name(src.getName()),
-	_isSigned(src.getSignStatus()),
-	_minSign(src.getMinSign()),
-	_minExec(src.getMinExec())
-{
-}
-
-Form & Form::operator=(Form const &src)
-{
-	this->_isSigned = src.getSignStatus();
-	return *this;
-}
-
 Form::~Form()
 {
 }

@@ -1,19 +1,8 @@
 #include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target)
-	:Form("RobotomyRequestForm", target, 72, 45)
+	:AForm("RobotomyRequestForm", target, 72, 45)
 {
-}
-
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &src)
-	:Form("RobotomyRequestForm", src.getTarget(), 72, 45)
-{
-}
-
-RobotomyRequestForm & RobotomyRequestForm::operator=(RobotomyRequestForm const &src)
-{
-	this->_isSigned = src.getSignStatus();
-	return *this;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()
@@ -23,9 +12,9 @@ RobotomyRequestForm::~RobotomyRequestForm()
 void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
 	if (this->_isSigned == false)
-		throw Form::UnsignedForExecutionException();
+		throw AForm::UnsignedForExecutionException();
 	else if (this->_minExec < executor.getGrade())
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 	else 
 	{
 		std::cout << "BBBBbbbbrrrrrrzzzzzzzzzzzz!!!!! ";

@@ -1,19 +1,8 @@
 #include "ShrubberyCreationForm.hpp"
 
 ShruberryCreationForm::ShruberryCreationForm(std::string target)
-	:Form("ShrubberyCreationForm", target, 145, 137)
+	:AForm("ShrubberyCreationForm", target, 145, 137)
 {
-}
-
-ShruberryCreationForm::ShruberryCreationForm(ShruberryCreationForm const &src)
-	:Form("ShrubberyCreationForm", src.getTarget(), 145, 137)
-{
-}
-
-ShruberryCreationForm & ShruberryCreationForm::operator=(ShruberryCreationForm const &src)
-{
-	this->_isSigned = src.getSignStatus();
-	return *this;
 }
 
 ShruberryCreationForm::~ShruberryCreationForm()
@@ -23,12 +12,12 @@ ShruberryCreationForm::~ShruberryCreationForm()
 void ShruberryCreationForm::execute(Bureaucrat const & executor) const
 {
 	if (this->_isSigned == false)
-		throw Form::UnsignedForExecutionException();
+		throw AForm::UnsignedForExecutionException();
 	else if (this->_minExec < executor.getGrade())
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 	else 
 	{
-		std::ofstream	file(this->_target + "_shruberry");
+		std::ofstream	file((this->_target + "_shruberry").c_str());
 		if (file.fail())
 			throw ShruberryCreationForm::FileErrorException();
 		file	<< "     ccee88oo\n"

@@ -1,26 +1,16 @@
 
 #### NAME
-NAME		= bureaucrat
+NAME		= template
 
 #### SOURCES
 SRCS 		+= main.cpp
-SRCS 		+= Bureaucrat.cpp
-SRCS 		+= AForm.cpp
-SRCS 		+= ShrubberyCreationForm.cpp
-SRCS 		+= RobotomyRequestForm.cpp
-SRCS 		+= PresidentialPardonForm.cpp
-SRCS 		+= Intern.cpp
 
 #### OBJECTS
 PATH_OBJS	= objs/
 OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 
 #### HEADERS
-INCLUDES	+= Bureaucrat.hpp
-INCLUDES	+= AForm.hpp
-INCLUDES	+= RobotomyRequestForm.hpp
-INCLUDES	+= PresidentialPardonForm.hpp
-INCLUDES	+= Intern.hpp
+INCLUDES	+= iter.hpp
 
 #### COMPILATION
 COMP = c++
@@ -51,7 +41,6 @@ clean:
 	@printf "$(PURPLE)------Object files deleted-------\n\n"
 
 fclean: clean
-	@$(RM) *_shruberry
 	@$(RM) $(NAME)
 	@printf "$(GREEN)----Executable files deleted-----\n\n"
 

@@ -2,6 +2,8 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <typeinfo>
+
 
 class Base 
 {
@@ -14,8 +16,8 @@ class C : public Base {};
 
 Base * generate(void)
 {
-	Base *randomClass;
 	int	randomNumber;
+	Base *randomClass;
 
 	std::srand(std::time(0)); // madatory to 'initialize' the random number generator
 	std::cout << "Generating random class instance..." << std::endl;
@@ -60,7 +62,7 @@ void identify(Base* p)
 	C* c = dynamic_cast<C *>(p);
 	if (c)
 	{
-		std::cout << "C class indentified!" << std::endl << std::endl;
+		std::cout << "C class identified!" << std::endl << std::endl;
 		return ;
 	}
 }
@@ -72,18 +74,21 @@ void identify(Base& p)
 		A& a = dynamic_cast<A &>(p);
 		std::cout << "A class identified!" << std::endl << std::endl;
 		(void)a;
+		return ;
 	}
 	catch (const std::bad_cast &e) {}
 	try {
 		B& b = dynamic_cast<B &>(p);
 		std::cout << "B class identified!" << std::endl << std::endl;
 		(void)b;
+		return ;
 	}
 	catch (const std::bad_cast &e) {}
 	try {
 		C& c = dynamic_cast<C &>(p);
 		std::cout << "C class identified!" << std::endl << std::endl;
 		(void)c;
+		return ;
 	}
 	catch (const std::bad_cast &e) {}
 }

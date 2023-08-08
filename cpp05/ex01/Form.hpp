@@ -9,17 +9,17 @@ class Bureaucrat;
 
 class Form
 {
-protected:
+private:
 	std::string const _name;
 	bool _isSigned;
 	int const _minSign;
 	int const _minExec;
 
 	Form();
-
-public:
 	Form(Form const &src);
 	Form & operator=(Form const &src);
+
+public:
 	Form(std::string name, int minSign, int minExec);
 	~Form();
 

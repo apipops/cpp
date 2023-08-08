@@ -19,7 +19,7 @@ Intern::~Intern()
 {
 }
 
-Form* Intern::makeForm(std::string formName, std::string target)
+AForm* Intern::makeForm(std::string formName, std::string target)
 {
 	std::string forms[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
 	t_function 	functions[3] = {&Intern::_makeShrubberryForm, &Intern::_makeRobotomyForm, &Intern::_makePardonForm};
@@ -28,7 +28,7 @@ Form* Intern::makeForm(std::string formName, std::string target)
 		i++;
 	if (i < 3)
 	{
-		Form *form;
+		AForm *form;
 		std::cout << "Intern creates " << formName << std::endl;
 		form = (this->*functions[i])(target);
 		return form;
@@ -38,17 +38,17 @@ Form* Intern::makeForm(std::string formName, std::string target)
 	return NULL;
 }
 
-Form*  Intern::_makeShrubberryForm(std::string target)
+AForm*  Intern::_makeShrubberryForm(std::string target)
 {
 	return new ShruberryCreationForm(target);
 }
 
-Form* Intern::_makeRobotomyForm(std::string target)
+AForm* Intern::_makeRobotomyForm(std::string target)
 {
 	return new RobotomyRequestForm(target);
 }
 
-Form* Intern::_makePardonForm(std::string target)
+AForm* Intern::_makePardonForm(std::string target)
 {
 	return new PresidentialPardonForm(target);
 }

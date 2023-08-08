@@ -15,14 +15,14 @@ public:
 	Intern & operator=(Intern const &src);
 	~Intern();
 
-	Form* makeForm(std::string formName, std::string target);
+	AForm* makeForm(std::string formName, std::string target);
 
 private:
-	Form* _makeShrubberryForm(std::string target);
-	Form* _makeRobotomyForm(std::string target);
-	Form* _makePardonForm(std::string target);
+	AForm* _makeShrubberryForm(std::string target);
+	AForm* _makeRobotomyForm(std::string target);
+	AForm* _makePardonForm(std::string target);
 };
 
-typedef	Form*	(Intern::*t_function)(std::string target);
+typedef	AForm*	(Intern::*t_function)(std::string target);
 
 #endif

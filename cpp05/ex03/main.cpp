@@ -12,7 +12,7 @@ int main()
 	Intern someRandomIntern;
 
 	std::cout << std::endl << "> #1 MAKING SHRUBERRY CREATION" << std::endl;
-	Form *f1;
+	AForm *f1;
 	f1 = someRandomIntern.makeForm("shrubbery creation", "park");
 	if (f1)
 	{
@@ -21,7 +21,7 @@ int main()
 	}
 
 	std::cout << std::endl << "> #2 MAKING ROBOTOMY REQUEST" << std::endl;
-	Form *f2;
+	AForm *f2;
 	f2 = someRandomIntern.makeForm("robotomy request", "John");
 	if (f2)
 	{
@@ -30,7 +30,7 @@ int main()
 	}
 
 	std::cout << std::endl << "> #3 MAKING PRESIDENTIAL PARDON" << std::endl;
-	Form *f3;
+	AForm *f3;
 	f3 = someRandomIntern.makeForm("presidential pardon", "Mary");
 	if (f3)
 	{
@@ -39,7 +39,7 @@ int main()
 	}
 
 	std::cout << std::endl << "> #4 MAKING INVALID FORM" << std::endl;
-	Form *f4;
+	AForm *f4;
 	f4 = someRandomIntern.makeForm("invalid", "bloop");
 	if (f4)
 	{

@@ -5,7 +5,7 @@ NAME		= bureaucrat
 #### SOURCES
 SRCS 		+= main.cpp
 SRCS 		+= Bureaucrat.cpp
-SRCS 		+= Form.cpp
+SRCS 		+= AForm.cpp
 SRCS 		+= ShrubberyCreationForm.cpp
 SRCS 		+= RobotomyRequestForm.cpp
 SRCS 		+= PresidentialPardonForm.cpp
@@ -16,7 +16,7 @@ OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 
 #### HEADERS
 INCLUDES	+= Bureaucrat.hpp
-INCLUDES	+= Form.hpp
+INCLUDES	+= AForm.hpp
 INCLUDES	+= RobotomyRequestForm.hpp
 INCLUDES	+= PresidentialPardonForm.hpp
 
