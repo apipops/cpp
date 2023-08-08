@@ -10,7 +10,7 @@ PATH_OBJS	= objs/
 OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 
 #### HEADERS
-INCLUDES	+= iter.hpp
+INCLUDES	+= Array.hpp
 
 #### COMPILATION
 COMP = c++
