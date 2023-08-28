@@ -4,6 +4,7 @@
 # include <string>
 # include <iostream>
 # include <cstddef>
+# include <cstdlib>
 
 
 template< typename T>
