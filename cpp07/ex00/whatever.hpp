@@ -1,7 +1,6 @@
 #ifndef WHATERVER_HPP
 # define WHATERVER_HPP
 
-# include <string>
 # include <iostream>
 
 template< typename T>
