@@ -1,16 +1,17 @@
 
 #### NAME
-NAME		= easyfind
+NAME		= span
 
 #### SOURCES
 SRCS 		+= main.cpp
+SRCS 		+= Span.cpp
 
 #### OBJECTS
 PATH_OBJS	= objs/
 OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 
 #### HEADERS
-INCLUDES	+= easyfind.hpp
+INCLUDES	+= Span.hpp
 
 #### COMPILATION
 COMP = c++
