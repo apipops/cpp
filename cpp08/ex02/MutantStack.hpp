@@ -1,12 +1,12 @@
 #ifndef MUTAN_STACK_HPP
 # define MUTAN_STACK_HPP
 
-#include <iostream>
-#include <stack>
-#include <list>
-#include <iterator>
-#include <cstdlib>
-#include <limits>
+# include <iostream>
+# include <stack>
+# include <list>
+# include <iterator>
+# include <cstdlib>
+# include <limits>
 
 template< typename T>
 class MutantStack : public std::stack<T>

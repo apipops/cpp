@@ -1,11 +1,11 @@
 #ifndef EASYFIND_HPP
 # define EASYFIND_HPP
 
-#include <iostream>
-#include <list>
-#include <vector>
-#include <algorithm>
-#include <iterator>
+# include <iostream>
+# include <list>
+# include <vector>
+# include <algorithm>
+# include <iterator>
 
 
 template< typename T>
