@@ -3,21 +3,22 @@
 
 #include <iostream>
 #include <stack>
+#include <list>
 #include <iterator>
 #include <cstdlib>
 #include <limits>
 
 template< typename T>
-class MutanStack : public std::stack<T>
+class MutantStack : public std::stack<T>
 {
 public:
-	MutanStack<T>() : std::stack<T>() {}
- 	MutanStack<T>(const MutanStack & src) { *this = src; }
-	MutanStack<T> & operator=(const MutanStack & src) { 
+	MutantStack<T>() : std::stack<T>() {}
+ 	MutantStack<T>(const MutantStack & src) { *this = src; }
+	MutantStack<T> & operator=(const MutantStack & src) { 
 		std::stack<T>::operator=(src);
 		return *this;
 	}
-	~MutanStack<T>() {};
+	~MutantStack<T>() {};
 
 	// The std::stack class is a container adaptor and acts as a wrapper to the underlying container.
 	// The default underlying container is std::deque and 'container_type' refers to the underlying container.

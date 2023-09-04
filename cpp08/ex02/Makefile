@@ -1,6 +1,6 @@
 
 #### NAME
-NAME		= MutanStack
+NAME		= MutantStack
 
 #### SOURCES
 SRCS 		+= main.cpp
@@ -10,7 +10,7 @@ PATH_OBJS	= objs/
 OBJS		= $(patsubst %.cpp, $(PATH_OBJS)/%.o, $(SRCS))
 
 #### HEADERS
-INCLUDES	+= MutanStack.hpp
+INCLUDES	+= MutantStack.hpp
 
 #### COMPILATION
 COMP = c++
