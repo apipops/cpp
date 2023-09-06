@@ -18,7 +18,15 @@ private:
 	std::string 					_path;
 	std::map<std::string, float>	_map;
 
-	BitcoinExchange();
+	BitcoinExchange(); // Cannot be instanciated with no parameter
+
+	void _fillRateMap();
+	void _exitError(std::string const msg) const;
+	void _convertLine(std::string & line) const;
+	bool _checkLine(std::string & date, std::string & delim, std::string & value) const;
+	bool _checkDate(std::string & date) const;
+	bool _isDigitStr(std::string & str) const;
+	bool _isFloatStr(std::string & str) const;
 
 public:
 	BitcoinExchange(std::string data_path);
@@ -26,16 +34,7 @@ public:
 	BitcoinExchange & operator=(BitcoinExchange const & src);
 	~BitcoinExchange();
 
-	// a supprimer apres 
-	std::map<std::string, float> & getMap() { return _map; }
-
-	void exitError(std::string const msg) const;
-	void fillRateMap();
-	void convert(std::string input_path) const;
-	void convertLine(std::string & line) const;
-	bool checkLine(std::string & line) const;
-	bool checkDate(std::string date) const;
-	bool isDigitString(std::string & str) const;
+	void convert(std::string const input_path) const;
 
 };
 

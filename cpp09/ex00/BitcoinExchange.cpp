@@ -1,8 +1,13 @@
 #include "BitcoinExchange.hpp"
 
+BitcoinExchange::BitcoinExchange():_path("")
+{
+	BitcoinExchange::_fillRateMap();
+}
+
 BitcoinExchange::BitcoinExchange(std::string data_path):_path(data_path)
 {
-	BitcoinExchange::fillRateMap();
+	BitcoinExchange::_fillRateMap();
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const & src)
@@ -21,18 +26,12 @@ BitcoinExchange::~BitcoinExchange()
 {
 }
 
-void BitcoinExchange::exitError(std::string const msg) const
-{
-	std::cout << "Error: " << msg << std::endl;
-	exit(EXIT_FAILURE);
-}
-
-void BitcoinExchange::fillRateMap()
+void BitcoinExchange::_fillRateMap()
 {
 	std::ifstream data_file(this->_path.c_str());
 
 	if (data_file.fail())
-		BitcoinExchange::exitError("could not open source file.");
+		BitcoinExchange::_exitError("could not open source file.");
 	else {
 		std::string line;
 		std::getline(data_file, line);
@@ -45,11 +44,17 @@ void BitcoinExchange::fillRateMap()
 				this->_map[key] = value;
 			else {
 				data_file.close();
-				BitcoinExchange::exitError("invalid source file format.");
+				BitcoinExchange::_exitError("invalid source file format.");
 			}
 		}
 		data_file.close();
 	}
+}
+
+void BitcoinExchange::_exitError(std::string const msg) const
+{
+	std::cout << "Error: " << msg << std::endl;
+	exit(EXIT_FAILURE);
 }
 
 void BitcoinExchange::convert(std::string input_path) const
@@ -58,43 +63,53 @@ void BitcoinExchange::convert(std::string input_path) const
 	std::string 	line;
 
 	if (input.fail())
-		exitError(" coult not open input file.");
+		_exitError("could not open input file.");
 	std::getline(input, line);
-	if (line.compare("data | value")) {
+	if (line.compare("date | value")) {
 		input.close();
-		exitError("invalid input file format."); // verifier s'il faut fermer le fichier
+		_exitError("invalid input file format."); // verifier s'il faut fermer le fichier
 	}
 	while (std::getline(input, line))
-		BitcoinExchange::convertLine(line);
+		BitcoinExchange::_convertLine(line);
 	input.close();
 }
 
-void BitcoinExchange::convertLine(std::string & line) const
-{
-	if (BitcoinExchange::checkLine(line)) {
-		
-	}
-
-}
-
-bool BitcoinExcahnge::checkLine(std::string & line) const
+void BitcoinExchange::_convertLine(std::string & line) const
 {
 	std::stringstream ss(line);
 	std::string date, delim, value;
 
 	ss >> date >> delim >> value;
-	if (!checkDat(date))
-		return (std::cout << "Error: bad input =>" << date << std::endl, false);
+	if (!date.empty() && BitcoinExchange::_checkLine(date, delim, value)) {
+		std::map<std::string, float>::const_iterator it = this->_map.upper_bound(date); // first element stricly superior to the date
+		if (it == this->_map.begin())
+			std::cout << "Error: date is too early => " << date << std::endl;
+		else {
+			it--;
+			float result = it->second * std::atof(value.c_str());
+			std::cout << date << " => " << value << " = " << result << std::endl;
+		}
+	}
+}
+
+bool BitcoinExchange::_checkLine(std::string & date, std::string & delim, std::string & value) const
+{
+	if (!_checkDate(date))
+		return (std::cout << "Error: bad input => " << date << std::endl, false);
+	if (delim.empty() || value.empty())
+		return (std::cout << "Error: no value." << std::endl, false);
 	if (delim.compare("|"))
-		return (std::cout << "Error: bad input =>" << delim << std::endl, false);
-	if (std::atof(value) < 0)
+		return (std::cout << "Error: bad input => " << delim << std::endl, false);
+	if (!BitcoinExchange::_isFloatStr(value))
+		return (std::cout << "Error: not a decimal value => " << value << std::endl, false);
+	if (std::atof(value.c_str()) < 0)
 		return (std::cout << "Error: not a positive number." << std::endl, false);
-	if (!std::atof(value) > 1000)
+	if (std::atof(value.c_str()) > 1000)
 		return (std::cout << "Error: too large number." << std::endl, false);
 	return true;
 } 
 
-bool BitcoinExchange::checkDate(std::string date) const
+bool BitcoinExchange::_checkDate(std::string & date) const
 {
 	std::stringstream ss(date);
 	std::string year, month, day;
@@ -105,8 +120,8 @@ bool BitcoinExchange::checkDate(std::string date) const
 	std::getline(ss, year, '-');
 	std::getline(ss, month, '-');
 	std::getline(ss, day);
-	if (!BitcoinExchange::isDigitString(year) || !BitcoinExchange::isDigitString(month)
-		|| !BitcoinExchange::isDigitString(day))
+	if (!BitcoinExchange::_isDigitStr(year) || !BitcoinExchange::_isDigitStr(month)
+		|| !BitcoinExchange::_isDigitStr(day))
 		return false;
 	iyear = std::atoi(year.c_str());	
 	imonth = std::atoi(month.c_str());	
@@ -124,12 +139,36 @@ bool BitcoinExchange::checkDate(std::string date) const
 	return true;
 }
 
-
-bool BitcoinExchange::isDigitString(std::string & str) const
+bool BitcoinExchange::_isDigitStr(std::string & str) const
 {
 	for (std::string::iterator it = str.begin(); it != str.end(); it++) {
         if (!std::isdigit(*it))
 			return false;
 	}
 	return true;
+}
+
+bool BitcoinExchange::_isFloatStr(std::string & str) const
+{
+    size_t i = 0;
+    bool dotFlag = false;
+    bool digitFlag = false;
+	
+	if (str.empty())
+		return false; // Empty string is not valid
+	if (str[i] == '+' || str[i] == '-') // Check for an optional sign (+ or -)
+		++i;
+    while (i < str.size()) {
+        if (isdigit(str[i]))
+    		digitFlag = true;
+        else if (str[i] == '.') {
+            if (dotFlag || !digitFlag)
+                return false; // More than one dot or dot before any digits is not valid
+            dotFlag = true;
+        }
+		else
+            return false; // Invalid character found
+        i++;
+    }
+    return digitFlag; // At least one digit is required
 }
