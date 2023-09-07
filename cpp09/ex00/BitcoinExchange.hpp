@@ -9,8 +9,6 @@
 # include <iterator>
 
 # define EXIT_FAILURE 1
-# define WRONG false
-# define VALID true
 
 class BitcoinExchange
 {
