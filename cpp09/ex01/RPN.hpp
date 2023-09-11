@@ -9,10 +9,6 @@
 # include <iterator>
 
 # define EXIT_FAILURE 1
-# define ADD 0
-# define SUB 1
-# define MULT 2
-# define DIV 3
 
 class RPN
 {
