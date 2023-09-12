@@ -18,8 +18,7 @@ private:
 
 	RPN(); // Cannot be instanciated with no parameter
 
-	void	_exitError() const;
-	void	_executeOperator(std::string & token);
+	bool	_executeOperator(std::string & token);
 
 public:
 	RPN(std::string math_expression);

@@ -24,12 +24,6 @@ RPN::~RPN()
 {
 }
 
-void RPN::_exitError() const
-{
-	std::cout << "Error" << std::endl;
-	exit(EXIT_FAILURE);
-}
-
 void RPN::calculate()
 {
 	std::stringstream	ss(this->_expression);
@@ -39,21 +33,27 @@ void RPN::calculate()
 	{
 		if (token.size() == 1 && std::isdigit(token[0]))
 			this->_stack.push(std::atof(token.c_str()));
-		else if (token == "+" || token == "-" || token == "*" || token == "/")
-			RPN::_executeOperator(token);
-		else if (!token.empty())
-			RPN::_exitError();
+		else if (token == "+" || token == "-" || token == "*" || token == "/") {
+			if (!RPN::_executeOperator(token))
+				return ;
+		}
+		else if (!token.empty()) {
+			std::cout << "Error" << std::endl;
+			return;
+		}
 	}
-	if (this->_stack.size() != 1)
-		RPN::_exitError();
+	if (this->_stack.size() != 1) {
+		std::cout << "Error" << std::endl;
+		return;
+	}
 	else
 		std::cout << this->_stack.top() << std::endl;
 }
 
-void	RPN::_executeOperator(std::string & token)
+bool	RPN::_executeOperator(std::string & token)
 {
 	if (this->_stack.size() < 2)
-		RPN::_exitError();
+		return (std::cout << "Error" << std::endl, false);
 	
 	float last = this->_stack.top(); // sauvegarder la dernière valeur
 	this->_stack.pop(); // vider valeur
@@ -68,6 +68,7 @@ void	RPN::_executeOperator(std::string & token)
 		this->_stack.push(before_last * last);
 	else if (token == "/" && last)
 		this->_stack.push(before_last / last);
-	else 
-		RPN::_exitError();
+	else
+		return (std::cout << "Error" << std::endl, false);
+	return true;
 }

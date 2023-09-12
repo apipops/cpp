@@ -9,7 +9,7 @@ int main(void) {
 
     std::cout << "Original vector: " << original << std::endl << std::endl;
 
-    std::cout << "Copying and assinging from original vector..." << std::endl;
+    std::cout << "Copying and assigning from original vector..." << std::endl;
     Span copy(original);
     Span assigned;
     assigned = original;
@@ -19,6 +19,7 @@ int main(void) {
 
     std::cout << "Original vector after: " << original << std::endl;
     std::cout << "Copy vector after: " << copy << std::endl;
+    std::cout << "Assigned vector after: " << assigned << std::endl;
   }
 
   // Full vector exceptions and spans
@@ -36,8 +37,8 @@ int main(void) {
     }
 
     std::cout << std::endl << "--------BASIC SPAN TESTS--------" << std::endl;
-    std::cout << "Shortest vector: " << vector.shortestSpan() << std::endl;
-    std::cout << "Longest vector: " << vector.longestSpan() << std::endl;
+    std::cout << "Shortest span: " << vector.shortestSpan() << std::endl;
+    std::cout << "Longest span: " << vector.longestSpan() << std::endl;
   }
 
   // No span exceptions

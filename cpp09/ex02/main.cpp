@@ -8,7 +8,7 @@ int main(int ac, char **av)
 		std::cout << "Error" << std::endl;
 	else {
 		PmergeMe PmergeMe(av[1]);
-		PmergeMe.display();
+		PmergeMe.execute();
 	}
 	return (0);
 }
