@@ -88,7 +88,7 @@ int main(void) {
 		}
     }
 
-	// filling additonal vector
+	  // filling additonal vector
     for (int i = 100; i < 200; i++) {
       additional_vector.push_back(i);
     }

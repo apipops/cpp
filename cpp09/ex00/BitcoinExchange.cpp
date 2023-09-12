@@ -1,13 +1,12 @@
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange():_path("")
+BitcoinExchange::BitcoinExchange():_valid(false)
 {
-	BitcoinExchange::_fillRateMap();
 }
 
-BitcoinExchange::BitcoinExchange(std::string data_path):_path(data_path)
+BitcoinExchange::BitcoinExchange(std::string source_path)
 {
-	BitcoinExchange::_fillRateMap();
+	BitcoinExchange::_fillRateMap(source_path);
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const & src)
@@ -17,7 +16,7 @@ BitcoinExchange::BitcoinExchange(BitcoinExchange const & src)
 
 BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & src)
 {
-	this->_path = src._path;
+	this->_valid = src._valid;
 	this->_map = src._map;
 	return *this;
 }
@@ -26,12 +25,14 @@ BitcoinExchange::~BitcoinExchange()
 {
 }
 
-void BitcoinExchange::_fillRateMap()
+void BitcoinExchange::_fillRateMap(std::string & source_path)
 {
-	std::ifstream data_file(this->_path.c_str());
+	std::ifstream data_file(source_path.c_str());
 
-	if (data_file.fail())
-		BitcoinExchange::_exitError("could not open source file.");
+	if (data_file.fail()) {
+		BitcoinExchange::_errorSourceFile("could not open source file.");
+		return ;
+	}
 	else {
 		std::string line;
 		std::getline(data_file, line);
@@ -43,31 +44,36 @@ void BitcoinExchange::_fillRateMap()
 			if (std::getline(lineStream, key, ',') && lineStream >> value)
 				this->_map[key] = value;
 			else {
-				data_file.close();
-				BitcoinExchange::_exitError("invalid source file format.");
+				BitcoinExchange::_errorSourceFile("invalid source file format.");
+				return ;
 			}
 		}
 		data_file.close();
+		this->_valid = true;
 	}
 }
 
-void BitcoinExchange::_exitError(std::string const msg) const
+void BitcoinExchange::_errorSourceFile(std::string const msg)
 {
+	this->_valid = false;
 	std::cout << "Error: " << msg << std::endl;
-	exit(EXIT_FAILURE);
 }
 
-void BitcoinExchange::convert(std::string input_path) const
+void BitcoinExchange::convert(std::string input_path)
 {
-	std::ifstream	input(input_path);
+	std::ifstream	input(input_path.c_str());
 	std::string 	line;
 
-	if (input.fail())
-		_exitError("could not open input file.");
+	if (!this->_valid)
+		return ;
+	if (input.fail()) {
+		std::cout << "Error: could not open input file." << std::endl;
+		return ; 
+	}
 	std::getline(input, line);
 	if (line.compare("date | value")) {
-		input.close();
-		_exitError("invalid input file format."); // verifier s'il faut fermer le fichier
+		std::cout << "Error: invalid input file format." << std::endl;
+		return ;
 	}
 	while (std::getline(input, line))
 		BitcoinExchange::_convertLine(line);

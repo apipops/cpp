@@ -8,6 +8,7 @@
 # include <iterator>
 # include <cstdlib>
 # include <limits>
+# include <ctime>
 
 class Span 
 {

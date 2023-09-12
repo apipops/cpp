@@ -20,7 +20,7 @@ Span & Span::operator=(const Span & src)
 	return *this;
 }
 
-Span::~Span() // Allocation de la mémoire automatique ?
+Span::~Span()
 {
 }
 
