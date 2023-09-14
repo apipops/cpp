@@ -4,9 +4,9 @@ PmergeMe::PmergeMe()
 {
 }
 
-PmergeMe::PmergeMe(std::string list)
+PmergeMe::PmergeMe(char **av)
 {
-	PmergeMe::_parseList(list);
+	PmergeMe::_parseList(av);
 }
 
 PmergeMe::PmergeMe(PmergeMe const & src)
@@ -18,6 +18,7 @@ PmergeMe & PmergeMe::operator=(PmergeMe const & src)
 {
 	this->_vector = src._vector;
 	this->_deque = src._deque;
+	this->_valid = src._valid;
 	return *this;
 }
 
@@ -27,46 +28,67 @@ PmergeMe::~PmergeMe()
 
 void 	PmergeMe::execute()
 {
-	std::cout << "Before<vector>: ";
+	clock_t start, end;
+	double	vector, deque;
+
+	// Check parsing
+	if (!this->_valid)
+		return;
+
+	// Show list before sorting
+	std::cout << "Before: ";
 	PmergeMe::_display();
+	
+	// Chrono init and vector sorting
+	start = clock();
 	PmergeMe::_sortVector(0, this->_vector.size() - 1);
-	std::cout << "After<vector>: ";
+	end = clock();
+	vector = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1e6;
+
+	// Chrono init and deque sorting
+	start = clock();
+	PmergeMe::_sortDeque(0, this->_deque.size() - 1);
+	end = clock();
+	deque = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1e6;
+
+	// Show list after sorting
+	std::cout << "After: ";
 	PmergeMe::_display();
 
-	std::cout << "Before<deque>: ";
-	PmergeMe::_displayDeque();
-	PmergeMe::_sortDeque(0, this->_deque.size() - 1);
-	std::cout << "After<deque>: ";
-	PmergeMe::_displayDeque();
-	// afficher la liste avant
-	// initialisation du chrono
-	// tri pour vector + calcul temps
-	// tri pour list + calcul temps
-	// affichier liste apres
-	// afficher le temps pour vector
-	// afficher le temps pour list
+	// Show times to process
+	std::cout << "Time to process a range of " << this->size() << " elements with std::vector : "<< vector << " us" << std::endl;
+	std::cout << "Time to process a range of " << this->size() << " elements with std::deque : "<< deque << " us" << std::endl;
+}
+
+unsigned int PmergeMe::size() const
+{
+	return this->_deque.size();
 }
 
 
 /*------------------------------------------------------------PARSING & UTILS------------------------------------------------------------*/
 
-void	PmergeMe::_parseList(std::string & list)
+void	PmergeMe::_parseList(char **av)
 {
-	std::stringstream	ss(list);
+	int 				i = 1;
 	std::string			token;
 
-	while (std::getline(ss, token, ' '))
+	while (av[i])
 	{
+		token = av[i];
 		if (!token.empty() && PmergeMe::_isDigitStr(token)) {
-			int value = std::atoi(token.c_str());
+			unsigned int value = std::atoi(av[i]);
 			this->_vector.push_back(value);
 			this->_deque.push_back(value);
 		}
 		else if (!token.empty()) {
 			std::cout << "Error" << std::endl;
+			this->_valid = false;
 			return ;
 		}
+		i++;
 	}
+	this->_valid = true;
 }
 
 bool PmergeMe::_isDigitStr(std::string & str) const
@@ -89,22 +111,11 @@ void PmergeMe::_display() const
 	std::cout << std::endl;
 }
 
-void PmergeMe::_displayDeque() const 
-{
-	std::deque<unsigned int>::const_iterator it;
-	for (it = this->_deque.begin(); it != this->_deque.end(); it++) {
-		std::cout << *it;
-		if (it < this->_deque.end() - 1)
-			std::cout << " ";
-	}
-	std::cout << std::endl;
-}
-
 /*------------------------------------------------------------VECTORS------------------------------------------------------------*/
 
 void 	PmergeMe::_sortVector(int begin, int end)
 {
-    if (end - begin < 10)
+    if (end - begin < K)
         PmergeMe::_insertSortVector(begin, end); // Insertion sort vectors below 10 elements
 	else {
 		int mid = begin + (end - begin) / 2; // Divide in sub-groups
@@ -184,7 +195,7 @@ void 	PmergeMe::_mergeSortVector(int begin, int mid, int end)
 
 void 	PmergeMe::_sortDeque(int begin, int end)
 {
-    if (end - begin < 10)
+    if (end - begin < K)
         PmergeMe::_insertSortDeque(begin, end); // Insertion sort deques below 10 elements
 	else {
 		int mid = begin + (end - begin) / 2; // Divide in sub-groups
@@ -259,3 +270,4 @@ void 	PmergeMe::_mergeSortDeque(int begin, int mid, int end)
         k++;
     }
 }
+
