@@ -88,7 +88,12 @@ void	PmergeMe::_parseList(char **av)
 		}
 		i++;
 	}
-	this->_valid = true;
+	if (PmergeMe::_isSorted()) {
+		std::cout << "Error: numbers are already sorted" << std::endl;
+		this->_valid = false;
+	}
+	else 
+		this->_valid = true;
 }
 
 bool PmergeMe::_isDigitStr(std::string & str) const
@@ -96,6 +101,22 @@ bool PmergeMe::_isDigitStr(std::string & str) const
 	for (std::string::iterator it = str.begin(); it != str.end(); it++) {
         if (!std::isdigit(*it))
 			return false;
+	}
+	return true;
+}
+
+bool PmergeMe::_isSorted() const
+{
+	if (this->size() == 1)
+		return true;
+
+	std::vector<unsigned int>::const_iterator it;
+	unsigned int val = *(this->_vector.begin());
+
+	for (it = this->_vector.begin() + 1; it != this->_vector.end(); it++) {
+		if (*it < val)
+			return false;
+		val = *it;
 	}
 	return true;
 }
@@ -270,4 +291,3 @@ void 	PmergeMe::_mergeSortDeque(int begin, int mid, int end)
         k++;
     }
 }
-

@@ -25,6 +25,7 @@ private:
 	// Parsing & Utils
 	void	_parseList(char **av);
 	bool	_isDigitStr(std::string & str) const;
+	bool	_isSorted() const;
 	void	_display() const;
 
 	// Vector sorting
