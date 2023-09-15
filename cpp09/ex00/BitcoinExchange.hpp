@@ -8,8 +8,6 @@
 # include <algorithm>
 # include <iterator>
 
-# define EXIT_FAILURE 1
-
 class BitcoinExchange
 {
 private:

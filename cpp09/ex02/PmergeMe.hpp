@@ -10,8 +10,7 @@
 # include <iterator>
 # include <ctime>
 
-# define K 10
-# define EXIT_FAILURE 1
+# define K 15
 
 class PmergeMe
 {
@@ -26,6 +25,7 @@ private:
 	void	_parseList(char **av);
 	bool	_isDigitStr(std::string & str) const;
 	bool	_isSorted() const;
+	bool	_hasDuplicates() const;
 	void	_display() const;
 
 	// Vector sorting

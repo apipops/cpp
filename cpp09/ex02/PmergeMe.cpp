@@ -89,7 +89,11 @@ void	PmergeMe::_parseList(char **av)
 		i++;
 	}
 	if (PmergeMe::_isSorted()) {
-		std::cout << "Error: numbers are already sorted" << std::endl;
+		std::cout << "Error: already sorted" << std::endl;
+		this->_valid = false;
+	}
+	else if (PmergeMe::_hasDuplicates()) {
+		std::cout << "Error: duplicates found" << std::endl;
 		this->_valid = false;
 	}
 	else 
@@ -114,11 +118,24 @@ bool PmergeMe::_isSorted() const
 	unsigned int val = *(this->_vector.begin());
 
 	for (it = this->_vector.begin() + 1; it != this->_vector.end(); it++) {
-		if (*it < val)
+		if (*it <= val)
 			return false;
 		val = *it;
 	}
 	return true;
+}
+
+bool PmergeMe::_hasDuplicates() const
+{
+	std::vector<unsigned int>::const_iterator it1, it2;
+
+	for (it1 = this->_vector.begin(); it1 != this->_vector.end(); it1++) {
+		for (it2 = it1 + 1; it2 != this->_vector.end(); it2++) {
+			if (*it1 == *it2)
+				return true;
+		}
+	}
+	return false;
 }
 
 void PmergeMe::_display() const 
